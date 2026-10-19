@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Scheme Generator</title>
+
+    <!-- GOOGLE FONT  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght400;600;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="index.css" />
+
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <form>
+        <input
+          type="color"
+          name="seed-color"
+          aria-label="Seed color"
+          id="seed-color"
+          class="seed-color"
+        />
+        <select name="color-mode" id="color-mode" aria-label="Color mode">
+          <option value="monochrome" selected>Monochrome</option>
+          <option value="monochrome-dark">Monochrome Dark</option>
+          <option value="monochrome-light">Monochrome Light</option>
+          <option value="analogic">Analogic</option>
+          <option value="complement">Complement</option>
+          <option value="analogic-complement">Analogic Complement</option>
+          <option value="triad">Triad</option>
+          <option value="quad">Quad</option>
+        </select>
+
+        <button type="submit">Generate color scheme</button>
+      </form>
+
+      <div
+        class="colors-container"
+        id="colors-container"
+        aria-live="polite"
+      ></div>
+      <div
+        class="color-codes-container"
+        id="color-codes-container"
+        aria-live="polite"
+      ></div>
+    </main>
+  </body>
+</html>
