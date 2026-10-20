@@ -41,3 +41,50 @@ function renderColors() {
 }
 
 renderColors();
+
+function copyColorCode() {
+  const feedbackTimers = new WeakMap();
+
+  function showCopied(element) {
+    element.style.setProperty("--copy-text", '"Copied!"');
+
+    clearTimeout(feedbackTimers.get(element));
+    feedbackTimers.set(
+      element,
+      setTimeout(() => {
+        element.style.removeProperty("--copy-text");
+        feedbackTimers.delete(element);
+      }, 1000),
+    );
+  }
+
+  async function copyToClipboard(colorCode, element) {
+    try {
+      await navigator.clipboard.writeText(colorCode);
+      showCopied(element);
+    } catch (err) {
+      console.error("Failed to copy color code:", err);
+    }
+  }
+
+  colorCodesContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("color-code")) {
+      const colorCode = e.target.textContent;
+      const colorHolder = Array.from(colorsContainer.children).find(
+        (holder) => holder.dataset.colorCode === colorCode,
+      );
+
+      if (colorHolder) {
+        copyToClipboard(colorCode, colorHolder);
+      }
+    }
+  });
+
+  colorsContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("color-holder")) {
+      copyToClipboard(e.target.dataset.colorCode, e.target);
+    }
+  });
+}
+
+copyColorCode();
